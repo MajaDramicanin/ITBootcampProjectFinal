@@ -1,5 +1,5 @@
 package pages;
 
-public class NotificationSystemPage {
+public class NotificationSystemPage extends BasicPage{
 
 }

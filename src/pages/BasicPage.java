@@ -1,5 +1,5 @@
 package pages;
 
-public class BasicPage {
+public abstract class BasicPage {
 
 }

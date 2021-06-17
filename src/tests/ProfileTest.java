@@ -1,5 +1,5 @@
 package tests;
 
-public class ProfileTest {
+public class ProfileTest extends BasicTest{
 
 }
