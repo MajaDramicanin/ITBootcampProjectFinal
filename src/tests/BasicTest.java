@@ -55,14 +55,14 @@ public abstract class BasicTest {
 		waiter = new WebDriverWait(driver, 10, 300);
 		js = (JavascriptExecutor)driver;
 
-		authPage = new AuthPage(driver);
-		cartSummaryPage = new CartSummaryPage(driver);
-		locationPopupPage = new LocationPopupPage(driver, js);
-		loginPage = new LoginPage(driver);
-		mealPage = new MealPage(driver);
-		notificationSystemPage = new NotificationSystemPage(driver);
-		profilePage = new ProfilePage(driver);
-		searchResultPage = new SearchResultPage(driver);
+		authPage = new AuthPage(driver, waiter, js);
+		cartSummaryPage = new CartSummaryPage(driver, waiter, js);
+		locationPopupPage = new LocationPopupPage(driver, waiter, js);
+		loginPage = new LoginPage(driver, waiter, js);
+		mealPage = new MealPage(driver, waiter, js);
+		notificationSystemPage = new NotificationSystemPage(driver, waiter, js);
+		profilePage = new ProfilePage(driver, waiter, js);
+		searchResultPage = new SearchResultPage(driver, waiter, js);
 
 	}
 
