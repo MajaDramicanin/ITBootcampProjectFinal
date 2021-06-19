@@ -50,9 +50,9 @@ public abstract class BasicTest {
 		System.setProperty("webdriver.chrome.driver", "driver-lib\\chromedriver.exe");
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
-		waiter = new WebDriverWait(driver, 10, 300);
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		driver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
+		waiter = new WebDriverWait(driver, 20, 300);
 		js = (JavascriptExecutor)driver;
 
 		authPage = new AuthPage(driver, waiter, js);
@@ -67,8 +67,9 @@ public abstract class BasicTest {
 	}
 
 	@AfterMethod
-	public void Close() {
-
+	public void Close() throws InterruptedException {
+		Thread.sleep(1000);
+		this.driver.quit();
 	}
 
 }

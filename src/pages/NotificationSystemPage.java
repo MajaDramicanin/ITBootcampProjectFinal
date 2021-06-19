@@ -27,6 +27,10 @@ public class NotificationSystemPage extends BasicPage{
 		waiter.until(ExpectedConditions.attributeContains(this.getAlertMsgDiv(), "style", "display: none;"));
 	}
 	
+	public void alertMsgWait() {
+		waiter.until(ExpectedConditions.visibilityOf(getAlertMsgDiv()));
+	}
+	
 	
 
 }

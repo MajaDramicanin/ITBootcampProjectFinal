@@ -82,27 +82,33 @@ public class ProfilePage extends BasicPage{
 		return this.getPasswordForm().findElement(By.name("btn_submit"));
 	}
 	
-	private WebElement getAvatar() {
+	public WebElement getAvatar() {
 		return this.driver.findElement(By.className("avatar"));
-	}	
-	
-	public void hoverAvatar() {
-		WebElement avatarDiv = this.getAvatar();
-		action.moveToElement(avatarDiv).build().perform();
 	}
 	
+	public void hoverAvatar() {
+		action.moveToElement(getAvatar()).build().perform();
+	}
+	 
 	public WebElement getUploadImgBtn() {
-		this.hoverAvatar();
-		return this.getAvatar().findElement(By.className("uploadFile-Js"));		
+		return this.driver.findElement(By.xpath("//*[@title=\"Uplaod\"]"));		
 	}
 	
 	public WebElement getRemoveImgBtn() {
-		this.hoverAvatar();
 		return this.getAvatar().findElement(By.className("remove"));
 	}
 	
-	public void setProfileImg(String imgUrl) {
-		this.getUploadImgBtn().sendKeys(imgUrl);
+	public void setProfileImg(String imgUrl) throws InterruptedException {
+		
+		WebElement btnUpload = this.getUploadImgBtn();
+//		this.hoverAvatar();
+//		Thread.sleep(500);
+//		js.executeScript("arguments[0].scrollIntoView();", btnUpload);
+//		action.moveToElement(btnUpload).build().perform();
+//		waiter.until(ExpectedConditions.elementToBeClickable(btnUpload));
+		js.executeScript("arguments[0].click();", btnUpload);
+//		waiter.until(ExpectedConditions.attributeToBe(btnUpload, "input type", "submit"));
+		btnUpload.sendKeys(imgUrl);		
 	}
 	
 	public void deleteProfileImg() {
@@ -134,7 +140,7 @@ public class ProfilePage extends BasicPage{
 		this.getCity().selectByVisibleText(city);
 		Thread.sleep(500);
 		this.getSaveProfileBtn().submit();
-		Thread.sleep(500);
+		Thread.sleep(1000);
 		
 	}
 	
