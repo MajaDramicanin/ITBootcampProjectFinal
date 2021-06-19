@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import jdk.nashorn.internal.scripts.JS;
@@ -32,7 +33,7 @@ public class LocationPopupPage extends BasicPage{
 		return driver.findElement(By.xpath("//li/a[contains(text(), '\" + locationName + \"')]/.."));
 	}
 	
-	public WebElement getLocationInput(String locationName) {
+	public WebElement getLocationInput() {
 		return  driver.findElement(By.xpath("//*[@id='location_id']"));
 	}
 	
@@ -46,8 +47,11 @@ public class LocationPopupPage extends BasicPage{
 	
 	public void setLocation(String locationName) {
 		this.getKeyword().click();
-		int dataValue = Integer.parseInt(this.getLocationItem(locationName).getAttribute("data-value"));
-		js.executeScript("arguments[0].value=arguments[1];", this.getLocationInput(locationName), dataValue);	
+//		waiter.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("")));
+//		js.executeScript("arguments[0].scrollIntoView();", this.getLocationItem(locationName));
+		String dataValue = this.getLocationItem(locationName).getAttribute("data-value");
+		js.executeScript("arguments[0].value=arguments[1];", this.getLocationInput(), dataValue);
+		this.getSubmit().click();
 	}
 
 }

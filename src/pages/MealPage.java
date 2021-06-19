@@ -20,16 +20,15 @@ public class MealPage extends BasicPage{
 		return this.getProductList().findElement(By.xpath("//div[@class=\"product-head\"]"));
 	}
 	
-	public void addToCart(String quantity) {
-		this.getFirstProduct().click();
-		this.driver.findElement(By.name("product_qty")).sendKeys(quantity);
+	public void addToCart(int quantity) {
+		String qty = Integer.toString(quantity);
+		this.driver.findElement(By.name("product_qty")).sendKeys(qty);
 		this.driver.findElement(By.name("product_qty")).click();
 		this.driver.findElement(By.className("js-proceedtoAddInCart")).click();
 	}
 	
 	public void addToFavorite() {
-		this.getProductList().findElement(By.xpath("//div/div/a")).click();
-		
+		this.driver.findElement(By.className("favourite")).click();		
 	}
 	
 	

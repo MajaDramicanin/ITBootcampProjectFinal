@@ -52,7 +52,7 @@ public abstract class BasicTest {
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		driver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
-		waiter = new WebDriverWait(driver, 20, 300);
+		waiter = new WebDriverWait(driver, 20, 200);
 		js = (JavascriptExecutor)driver;
 
 		authPage = new AuthPage(driver, waiter, js);
