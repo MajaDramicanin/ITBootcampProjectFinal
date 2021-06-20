@@ -6,7 +6,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class SearchResultPage extends BasicPage {
 
-	public SearchResultPage (WebDriver driver, WebDriverWait waiter, JavascriptExecutor js) {
+	public SearchResultPage(WebDriver driver, WebDriverWait waiter, JavascriptExecutor js) {
 		super(driver, waiter, js);
 	}
 

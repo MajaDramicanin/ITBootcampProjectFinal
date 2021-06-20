@@ -10,23 +10,23 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class NotificationSystemPage extends BasicPage{
-	
-	public NotificationSystemPage (WebDriver driver, WebDriverWait waiter, JavascriptExecutor js) {
+public class NotificationSystemPage extends BasicPage {
+
+	public NotificationSystemPage(WebDriver driver, WebDriverWait waiter, JavascriptExecutor js) {
 		super(driver, waiter, js);
 	}
-	
+
 	public WebElement getAlertMsgDiv() {
-		return this.driver.findElement(By.className("system_message"));		
+		return this.driver.findElement(By.className("system_message"));
 	}
-	
+
 	public String getAlertTxt() throws InterruptedException {
-		Thread.sleep(200);
+		Thread.sleep(400);
 		WebElement msgDiv = this.getAlertMsgDiv().findElement(By.className("content"));
 //		waiter.until(ExpectedConditions.not(ExpectedConditions.textToBePresentInElement(msgDiv, "Processing...")));
 		boolean msgSucc = true;
 		String msg = "";
-		try{
+		try {
 			msg = msgDiv.getText();
 		} catch (Exception e) {
 			msgSucc = false;
@@ -38,15 +38,13 @@ public class NotificationSystemPage extends BasicPage{
 		}
 		return msg;
 	}
-	
-	public void noAlertMsgWait() {		
+
+	public void noAlertMsgWait() {
 		waiter.until(ExpectedConditions.attributeContains(this.getAlertMsgDiv(), "style", "display: none;"));
 	}
-	
+
 	public void alertMsgWait() {
 		waiter.until(ExpectedConditions.visibilityOf(getAlertMsgDiv()));
 	}
-	
-	
 
 }
