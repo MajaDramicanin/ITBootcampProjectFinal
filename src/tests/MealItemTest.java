@@ -22,50 +22,54 @@ public class MealItemTest extends BasicTest {
 	String msgAllRemovedFromCart = "All meals removed from Cart successfully";
 	String locationName = "City Center - Albany";
 
-//	@Test 
-//	public void addMealToCartTest() throws InterruptedException {
-//		
-//		driver.get(url);
-//		
-//		locationPopupPage.getCloseBtn().click();
-//		
-//		mealPage.addToCart(3);
-//		
-//		String msg = notificationSystemPage.getAlertTxt();
-//		Assert.assertTrue(msg.contains(msgErrSelectLocation1), " [ERROR] Unexpected add to cart message "); 
-//		Assert.assertTrue(msg.contains(msgErrSelectLocation2), " [ERROR] Unexpected add to cart message "); 
-//		notificationSystemPage.noAlertMsgWait();
-//		
-//		locationPopupPage.popUpLocation();
-//		locationPopupPage.setLocation(locationName);
-//	}
-//	
-//	@Test 
-//	public void addMealToFavoriteTest () throws InterruptedException{
-//		driver.get(url);
-//		locationPopupPage.getCloseBtn().click();
-//		
-//		mealPage.addToFavorite();
-//		
-//		Assert.assertTrue(notificationSystemPage.getAlertTxt().contains(msgALoginFirst), " [ERROR] Unexpected add to favorites - login message "); 
-//		notificationSystemPage.noAlertMsgWait();
-//		
-//		url = this.baseUrl + "/guest-user/loginform";
-//		driver.get(url);
-//		
-//		loginPage.logIn(this.email, this.password);
-//		notificationSystemPage.noAlertMsgWait();
-//		
-//		url = this.baseUrl + "/meal/lobster-shrimp-chicken-quesadilla-combo";
-//		driver.get(url);
-//		
-//		mealPage.addToFavorite();
-//		
-//		Assert.assertTrue(notificationSystemPage.getAlertTxt().contains(msgAddedToFavorites), " [ERROR] Unexpected add to favorites message "); 
-//		notificationSystemPage.noAlertMsgWait();
-//	}
+	@Test (priority = 1)
+	public void addMealToCartTest() throws InterruptedException {
+		
+		driver.get(url);
+		
+		locationPopupPage.getCloseBtn().click();
+		
+		mealPage.addToCart(3);
+		
+		String msg = notificationSystemPage.getAlertTxt();
+		Assert.assertTrue(msg.contains(msgErrSelectLocation1), " [ERROR] Unexpected add to cart message "); 
+		Assert.assertTrue(msg.contains(msgErrSelectLocation2), " [ERROR] Unexpected add to cart message "); 
+		notificationSystemPage.noAlertMsgWait();
+		
+		locationPopupPage.popUpLocation();
+		locationPopupPage.setLocation(locationName);
+		
+		mealPage.addToCart(3);
+		Assert.assertTrue(msg.contains(msgAddedToCart), " [ERROR] Unexpected add to cart message "); 
+	
+	}
+	
+	@Test (priority = 2)
+	public void addMealToFavoriteTest () throws InterruptedException{
+		driver.get(url);
+		locationPopupPage.getCloseBtn().click();
+		
+		mealPage.addToFavorite();
+		
+		Assert.assertTrue(notificationSystemPage.getAlertTxt().contains(msgALoginFirst), " [ERROR] Unexpected add to favorites - login message "); 
+		notificationSystemPage.noAlertMsgWait();
+		
+		url = this.baseUrl + "/guest-user/loginform";
+		driver.get(url);
+		
+		loginPage.logIn(this.email, this.password);
+		notificationSystemPage.noAlertMsgWait();
+		
+		url = this.baseUrl + "/meal/lobster-shrimp-chicken-quesadilla-combo";
+		driver.get(url);
+		
+		mealPage.addToFavorite();
+		
+		Assert.assertTrue(notificationSystemPage.getAlertTxt().contains(msgAddedToFavorites), " [ERROR] Unexpected add to favorites message "); 
+		notificationSystemPage.noAlertMsgWait();
+	}
 
-	@Test
+	@Test (priority = 3)
 	public void clearCartTest() throws IOException, InterruptedException {
 		File file = new File("data/Data.xlsx");
 		FileInputStream fis = new FileInputStream(file);
@@ -79,12 +83,14 @@ public class MealItemTest extends BasicTest {
 		driver.get(url);
 //		
 		locationPopupPage.setLocation(locationName); 
-		Thread.sleep(7000); // By hand location setting, until I fix setLocation method
-
+//		Thread.sleep(7000); // By hand location setting, until I fix setLocation method
+		Thread.sleep(1000);
+		
 		for (int i = 1; i <= 5; i++) {
 			String mealUrl = sheet.getRow(i).getCell(0).getStringCellValue();
 			int quantity = (int) sheet.getRow(i).getCell(1).getNumericCellValue();
-
+			
+			Thread.sleep(1000);
 			driver.get(mealUrl);
 			Thread.sleep(3000);
 			mealPage.addToCart(quantity);

@@ -11,33 +11,40 @@ import jdk.nashorn.internal.scripts.JS;
 
 public class LocationPopupPage extends BasicPage {
 
-	private JavascriptExecutor js;
-
 	public LocationPopupPage(WebDriver driver, WebDriverWait waiter, JavascriptExecutor js) {
 		super(driver, waiter, js);
 	}
 
 	public WebElement getLocationHeader() {
-		return driver.findElement(By.xpath("//div[@class=\"location-selector\"]/a"));
+		return driver.findElement(By.xpath
+				("//div[@class=\"location-selector\"]/a"));
 	}
 
 	public WebElement getCloseBtn() {
-		return driver.findElement(By.xpath("//a[@class=\"close-btn close-btn-white\"]"));
+		return driver.findElement
+				(By.xpath("//a[@class=\"close-btn close-btn-white\"]"));
 	}
 
 	public WebElement getKeyword() {
-		return driver.findElement(By.xpath("//*[@id='locality_keyword']"));
+		return driver.findElement(By.id("locality_keyword"));
 	}
 
 	public WebElement getLocationItem(String locationName) {
-		return driver.findElement(By.xpath("//li/a[contains(text(), '\" + locationName + \"')]/.."));
+		WebElement locationItem = waiter.until
+				(ExpectedConditions.presenceOfElementLocated(By.xpath
+						("//li/a[contains(text(), \"" + locationName + "\")]/..")));
+		return locationItem;
+		
 	}
 
 	public WebElement getLocationInput() {
-		return driver.findElement(By.xpath("//*[@id='location_id']"));
+		WebElement locationInput = waiter.until
+				(ExpectedConditions.presenceOfElementLocated(By.xpath
+						("//*[@id='location_id']")));
+		return locationInput;
 	}
 
-	public WebElement getSubmit() {
+	public WebElement getSubmit() {		
 		return driver.findElement(By.xpath("//*[@name='btn_submit']"));
 	}
 
@@ -45,13 +52,15 @@ public class LocationPopupPage extends BasicPage {
 		this.getLocationHeader().click();
 	}
 
-	public void setLocation(String locationName) {
+	public void setLocation(String locationName) throws InterruptedException {
 		this.getKeyword().click();
-//		waiter.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("")));
-//		js.executeScript("arguments[0].scrollIntoView();", this.getLocationItem(locationName));
-		String dataValue = this.getLocationItem(locationName).getAttribute("data-value");
-		js.executeScript("arguments[0].value=arguments[1];", this.getLocationInput(), dataValue);
-		this.getSubmit().click();
+		Thread.sleep(3000);
+		WebElement locationItem = this.getLocationItem(locationName);
+		String dValue = locationItem.getAttribute("data-value");
+		WebElement locationInput = this.getLocationInput();		
+		js.executeScript("arguments[0].value=arguments[1];", locationInput, dValue);
+		Thread.sleep(300);
+		this.getSubmit().submit();
 	}
 
 }
