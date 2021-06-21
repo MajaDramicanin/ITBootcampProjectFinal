@@ -37,10 +37,17 @@ public class MealItemTest extends BasicTest {
 		notificationSystemPage.noAlertMsgWait();
 		
 		locationPopupPage.popUpLocation();
+		Thread.sleep(1000);
 		locationPopupPage.setLocation(locationName);
+		Thread.sleep(5000);
 		
-		mealPage.addToCart(3);
-		Assert.assertTrue(msg.contains(msgAddedToCart), " [ERROR] Unexpected add to cart message "); 
+		mealPage.addToCart(2);
+		Thread.sleep(500);
+		
+		System.out.println(msgAddedToCart);
+		System.out.println();
+		
+		Assert.assertTrue(notificationSystemPage.getAlertTxt().contains(msgAddedToCart), " [ERROR] Unexpected add to cart message "); 
 	
 	}
 	
@@ -110,7 +117,6 @@ public class MealItemTest extends BasicTest {
 		Assert.assertTrue(notificationSystemPage.getAlertTxt().contains(msgAllRemovedFromCart),
 				" [ERROR] Unexpected clear cart message ");
 		notificationSystemPage.noAlertMsgWait();
-
 	}
 
 }
