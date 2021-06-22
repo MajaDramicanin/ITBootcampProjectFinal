@@ -42,10 +42,6 @@ public class SearchTest extends BasicTest {
 			String searchLocation = sheet.getRow(i).getCell(0).getStringCellValue();
 			int numberOfResults = (int) sheet.getRow(i).getCell(2).getNumericCellValue();
 			
-			System.out.println(searchUrl);
-			System.out.println(searchLocation);
-			System.out.println(numberOfResults);
-			
 			driver.get(searchUrl);
 			
 			Thread.sleep(3000);
@@ -59,9 +55,6 @@ public class SearchTest extends BasicTest {
 			Thread.sleep(3000);
 			
 			int pageResNum = searchResultPage.getSearchResultsNumber();
-		
-			
-			System.out.println(pageResNum);
 			
 			sa.assertTrue(pageResNum == numberOfResults,
 					" [ERROR] Unexpected number of search results message ");

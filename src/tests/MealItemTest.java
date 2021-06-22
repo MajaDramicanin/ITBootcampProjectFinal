@@ -44,9 +44,6 @@ public class MealItemTest extends BasicTest {
 		mealPage.addToCart(2);
 		Thread.sleep(500);
 		
-		System.out.println(msgAddedToCart);
-		System.out.println();
-		
 		Assert.assertTrue(notificationSystemPage.getAlertTxt().contains(msgAddedToCart), " [ERROR] Unexpected add to cart message "); 
 	
 	}
