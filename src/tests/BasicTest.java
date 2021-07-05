@@ -96,6 +96,7 @@ public abstract class BasicTest {
 		}
 		Thread.sleep(1000);
 		this.driver.quit();
+		Thread.sleep(2000);
 	}
 
 }

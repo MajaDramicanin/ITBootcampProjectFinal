@@ -85,9 +85,9 @@ public class MealItemTest extends BasicTest {
 
 		url = this.baseUrl + "/meals";
 		driver.get(url);
-//		
+		
 		locationPopupPage.setLocation(locationName); 
-//		Thread.sleep(7000); // By hand location setting, until I fix setLocation method
+		Thread.sleep(7000); // By hand location setting, until I fix setLocation method
 		Thread.sleep(1000);
 		
 		for (int i = 1; i <= 5; i++) {
@@ -98,7 +98,7 @@ public class MealItemTest extends BasicTest {
 			driver.get(mealUrl);
 			Thread.sleep(3000);
 			mealPage.addToCart(quantity);
-			Thread.sleep(300);
+			Thread.sleep(500);
 			sa.assertTrue(notificationSystemPage.getAlertTxt().contains(msgAddedToCart),
 					" [ERROR] Unexpected add to cart message" + " for " + mealUrl);
 			notificationSystemPage.noAlertMsgWait();
